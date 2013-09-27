@@ -19,9 +19,9 @@ import java.sql.SQLException;
 public class FactoryDB {
    
     private static ConnectionSource connectionSource = null;
-    private static String databaseUrl = "jdbc:mysql://localhost:3306/ess";
-    private static String userdb = "root";
-    private static String passworddb = "r00t";
+    private static String databaseUrl = "jdbc:mysql://localhost:3306/essdev";
+    private static String userdb = "essuser";
+    private static String passworddb = "essuser1";
 
     private FactoryDB(){
 
