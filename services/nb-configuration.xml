@@ -15,5 +15,6 @@ Any value defined here will override the pom.xml file value but is only applicab
 -->
         <netbeans.hint.j2eeVersion>1.6-web</netbeans.hint.j2eeVersion>
         <org-netbeans-modules-maven-jaxws.rest_2e_config_2e_type>ide</org-netbeans-modules-maven-jaxws.rest_2e_config_2e_type>
+        <org-netbeans-modules-maven-jaxws.test_2e_client_2e_project>/Users/emilianoeloi/Documents/ADS/PA/2s2013/Easy-Surgeries-Schedule/services</org-netbeans-modules-maven-jaxws.test_2e_client_2e_project>
     </properties>
 </project-shared-configuration>
