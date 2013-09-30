@@ -1,6 +1,8 @@
 CREATE DATABASE ess 
 DEFAULT CHARACTER SET utf8;
 
+USE ess;
+
 CREATE TABLE medicos(
 	medico_id INT not null auto_increment,
 	medico_nome VARCHAR(255),
