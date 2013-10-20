@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 20/10/2013 06:07:26 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="unatec.ads.ess.model.Equipamento" table="equipamento" catalog="pa">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="descricao" type="string">
+            <column name="descricao" length="150" not-null="true" />
+        </property>
+        <property name="qtd" type="int">
+            <column name="qtd" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
