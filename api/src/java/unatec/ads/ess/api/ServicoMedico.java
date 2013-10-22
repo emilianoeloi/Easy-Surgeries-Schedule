@@ -10,7 +10,7 @@ import javax.ws.rs.Path;
  *
  * @author USER
  */
-@Path("/teste")
+@Path("/medicos")
 public class ServicoMedico {
     
 }
