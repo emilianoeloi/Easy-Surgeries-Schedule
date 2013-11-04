@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/10/2013 20:49:09 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="unatec.ads.ess.entidadeDao.Agendamentos" table="agendamentos" catalog="ess_homolog">
+        <id name="agendamentoId" type="java.lang.Integer">
+            <column name="agendamento_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="pacientes" class="unatec.ads.ess.entidadeDao.Pacientes" fetch="select">
+            <column name="paciente_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="salas" class="unatec.ads.ess.entidadeDao.Salas" fetch="select">
+            <column name="sala_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="medicos" class="unatec.ads.ess.entidadeDao.Medicos" fetch="select">
+            <column name="medico_id" not-null="true" />
+        </many-to-one>
+        <property name="agendamentoDataInicio" type="date">
+            <column name="agendamento_data_inicio" length="10" />
+        </property>
+        <property name="agendamentoDataFim" type="date">
+            <column name="agendamento_data_fim" length="10" />
+        </property>
+        <set name="equipamentosAgendamentoses" inverse="true">
+            <key>
+                <column name="agendamento_id" not-null="true" />
+            </key>
+            <one-to-many class="unatec.ads.ess.entidadeDao.EquipamentosAgendamentos" />
+        </set>
+        <set name="procedimentoses" inverse="false" table="procedimentos_agendamentos">
+            <key>
+                <column name="agendamento_id" not-null="true" />
+            </key>
+            <many-to-many entity-name="unatec.ads.ess.entidadeDao.Procedimentos">
+                <column name="procedimento_id" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="materiaisAgendamentoses" inverse="true">
+            <key>
+                <column name="agendamento_id" not-null="true" />
+            </key>
+            <one-to-many class="unatec.ads.ess.entidadeDao.MateriaisAgendamentos" />
+        </set>
+    </class>
+</hibernate-mapping>

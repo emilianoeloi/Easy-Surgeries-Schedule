@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/10/2013 20:49:09 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="unatec.ads.ess.entidadeDao.Pessoas" table="pessoas" catalog="ess_homolog">
+        <id name="pessoaId" type="java.lang.Integer">
+            <column name="pessoa_id" />
+            <generator class="identity" />
+        </id>
+        <property name="pessoaNome" type="string">
+            <column name="pessoa_nome" />
+        </property>
+        <property name="pessoaEmail" type="string">
+            <column name="pessoa_email" length="510" />
+        </property>
+        <property name="pessoaTelefone" type="string">
+            <column name="pessoa_telefone" length="100" />
+        </property>
+        <property name="pessoaLogin" type="string">
+            <column name="pessoa_login" length="100" />
+        </property>
+        <property name="pessoaSenhaHash" type="string">
+            <column name="pessoa_senha_hash" length="100" />
+        </property>
+        <set name="medicoses" inverse="true">
+            <key>
+                <column name="pessoa_id" not-null="true" />
+            </key>
+            <one-to-many class="unatec.ads.ess.entidadeDao.Medicos" />
+        </set>
+        <set name="pacienteses" inverse="true">
+            <key>
+                <column name="pessoa_id" not-null="true" />
+            </key>
+            <one-to-many class="unatec.ads.ess.entidadeDao.Pacientes" />
+        </set>
+        <set name="administradoreses" inverse="true">
+            <key>
+                <column name="pessoa_id" not-null="true" />
+            </key>
+            <one-to-many class="unatec.ads.ess.entidadeDao.Administradores" />
+        </set>
+    </class>
+</hibernate-mapping>

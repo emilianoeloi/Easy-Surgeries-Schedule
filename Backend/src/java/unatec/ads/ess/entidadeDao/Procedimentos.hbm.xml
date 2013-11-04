@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/10/2013 20:49:09 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="unatec.ads.ess.entidadeDao.Procedimentos" table="procedimentos" catalog="ess_homolog">
+        <id name="procedimentoId" type="java.lang.Integer">
+            <column name="procedimento_id" />
+            <generator class="identity" />
+        </id>
+        <property name="procedimentoDescricao" type="string">
+            <column name="procedimento_descricao" />
+        </property>
+        <set name="agendamentoses" inverse="true" table="procedimentos_agendamentos">
+            <key>
+                <column name="procedimento_id" not-null="true" />
+            </key>
+            <many-to-many entity-name="unatec.ads.ess.entidadeDao.Agendamentos">
+                <column name="agendamento_id" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

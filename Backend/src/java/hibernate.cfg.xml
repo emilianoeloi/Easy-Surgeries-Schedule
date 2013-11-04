@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/ess_homolog?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.current_session_context_class">thread</property>
+    <mapping resource="unatec/ads/ess/entidadeDao/EquipamentosAgendamentos.hbm.xml"/>
+    <mapping resource="unatec/ads/ess/entidadeDao/Medicos.hbm.xml"/>
+    <mapping resource="unatec/ads/ess/entidadeDao/Pacientes.hbm.xml"/>
+    <mapping resource="unatec/ads/ess/entidadeDao/Administradores.hbm.xml"/>
+    <mapping resource="unatec/ads/ess/entidadeDao/Equipamentos.hbm.xml"/>
+    <mapping resource="unatec/ads/ess/entidadeDao/Pessoas.hbm.xml"/>
+    <mapping resource="unatec/ads/ess/entidadeDao/Procedimentos.hbm.xml"/>
+    <mapping resource="unatec/ads/ess/entidadeDao/Salas.hbm.xml"/>
+    <mapping resource="unatec/ads/ess/entidadeDao/Materiais.hbm.xml"/>
+    <mapping resource="unatec/ads/ess/entidadeDao/Agendamentos.hbm.xml"/>
+    <mapping resource="unatec/ads/ess/entidadeDao/Especialidades.hbm.xml"/>
+    <mapping resource="unatec/ads/ess/entidadeDao/MateriaisAgendamentos.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

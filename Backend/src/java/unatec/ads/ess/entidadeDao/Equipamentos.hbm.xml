@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/10/2013 20:49:09 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="unatec.ads.ess.entidadeDao.Equipamentos" table="equipamentos" catalog="ess_homolog">
+        <id name="equipamentoId" type="java.lang.Integer">
+            <column name="equipamento_id" />
+            <generator class="identity" />
+        </id>
+        <property name="equipamentoDescricao" type="string">
+            <column name="equipamento_descricao" />
+        </property>
+        <property name="equipamentoQtdeDisponivel" type="java.lang.Integer">
+            <column name="equipamento_qtde_disponivel" />
+        </property>
+        <set name="equipamentosAgendamentoses" inverse="true">
+            <key>
+                <column name="equipamento_id" not-null="true" />
+            </key>
+            <one-to-many class="unatec.ads.ess.entidadeDao.EquipamentosAgendamentos" />
+        </set>
+    </class>
+</hibernate-mapping>
