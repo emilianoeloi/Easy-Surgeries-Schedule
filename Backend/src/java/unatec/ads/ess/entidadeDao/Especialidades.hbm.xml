@@ -1,24 +1,23 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 29/10/2013 20:49:09 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="unatec.ads.ess.entidadeDao.Especialidades" table="especialidades" catalog="ess_homolog">
-        <id name="especialidadeId" type="java.lang.Integer">
-            <column name="especialidade_id" />
-            <generator class="identity" />
-        </id>
-        <property name="especialidadeNome" type="string">
-            <column name="especialidade_nome" />
-        </property>
-        <property name="especialidadeDescricao" type="string">
-            <column name="especialidade_descricao" length="500" />
-        </property>
-        <set name="medicoses" inverse="true">
-            <key>
-                <column name="especialidade_id" />
-            </key>
-            <one-to-many class="unatec.ads.ess.entidadeDao.Medicos" />
-        </set>
-    </class>
+  <class catalog="ess_homolog" name="unatec.ads.ess.entidadeDao.Especialidades" table="especialidades">
+    <id name="especialidadeId" type="java.lang.Integer">
+      <column name="especialidade_id"/>
+      <generator class="identity"/>
+    </id>
+    <property name="especialidadeNome" type="string">
+      <column name="especialidade_nome"/>
+    </property>
+    <property name="especialidadeDescricao" type="string">
+      <column length="500" name="especialidade_descricao"/>
+    </property>
+    <set inverse="true" name="medicoses">
+      <key>
+        <column name="especialidade_id"/>
+      </key>
+      <one-to-many class="unatec.ads.ess.entidadeDao.Medicos"/>
+    </set>
+  </class>
 </hibernate-mapping>

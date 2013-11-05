@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package unatec.ads.ess.servicos.equipamento;
+package unatec.ads.ess.servicos;
 
 import java.util.List;
 import javax.ws.rs.DELETE;
@@ -11,6 +11,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import unatec.ads.ess.controle.ConexaoUtil;
@@ -21,7 +22,7 @@ import unatec.ads.ess.entidadeDao.Equipamentos;
  * @author user
  */
 
-@Path("/equipamento")
+@Path("/equipamentos")
 public class ServicoEquipamento {
     
     @POST
@@ -65,8 +66,17 @@ public class ServicoEquipamento {
     }
     
     @GET
+    @Path("/{_id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Equipamentos> listEquipamentos(@FormParam("id")int id){
+    public Equipamentos get(@PathParam("_id") int id){
+         
+        return (Equipamentos)ConexaoUtil.selecionar(Equipamentos.class, id);
+        
+    }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Equipamentos> lista(){
          
         List lista = ConexaoUtil.listar(Equipamentos.class);
         

@@ -1,25 +1,24 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 29/10/2013 20:49:09 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="unatec.ads.ess.entidadeDao.EquipamentosAgendamentos" table="equipamentos_agendamentos" catalog="ess_homolog">
-        <composite-id name="id" class="unatec.ads.ess.entidadeDao.EquipamentosAgendamentosId">
-            <key-property name="agendamentoId" type="int">
-                <column name="agendamento_id" />
-            </key-property>
-            <key-property name="equipamentoId" type="int">
-                <column name="equipamento_id" />
-            </key-property>
-        </composite-id>
-        <many-to-one name="equipamentos" class="unatec.ads.ess.entidadeDao.Equipamentos" update="false" insert="false" fetch="select">
-            <column name="equipamento_id" not-null="true" />
-        </many-to-one>
-        <many-to-one name="agendamentos" class="unatec.ads.ess.entidadeDao.Agendamentos" update="false" insert="false" fetch="select">
-            <column name="agendamento_id" not-null="true" />
-        </many-to-one>
-        <property name="equipamentoAgendamentoQtde" type="java.lang.Integer">
-            <column name="equipamento_agendamento_qtde" />
-        </property>
-    </class>
+  <class catalog="ess_homolog" name="unatec.ads.ess.entidadeDao.EquipamentosAgendamentos" table="equipamentos_agendamentos">
+    <composite-id class="unatec.ads.ess.entidadeDao.EquipamentosAgendamentosId" name="id">
+      <key-property name="agendamentoId" type="int">
+        <column name="agendamento_id"/>
+      </key-property>
+      <key-property name="equipamentoId" type="int">
+        <column name="equipamento_id"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="unatec.ads.ess.entidadeDao.Equipamentos" fetch="select" insert="false" name="equipamentos" update="false">
+      <column name="equipamento_id" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="unatec.ads.ess.entidadeDao.Agendamentos" fetch="select" insert="false" name="agendamentos" update="false">
+      <column name="agendamento_id" not-null="true"/>
+    </many-to-one>
+    <property name="equipamentoAgendamentoQtde" type="java.lang.Integer">
+      <column name="equipamento_agendamento_qtde"/>
+    </property>
+  </class>
 </hibernate-mapping>

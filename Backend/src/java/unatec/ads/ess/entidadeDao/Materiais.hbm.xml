@@ -1,24 +1,23 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 29/10/2013 20:49:09 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="unatec.ads.ess.entidadeDao.Materiais" table="materiais" catalog="ess_homolog">
-        <id name="materialId" type="java.lang.Integer">
-            <column name="material_id" />
-            <generator class="identity" />
-        </id>
-        <property name="materialDescricao" type="string">
-            <column name="material_descricao" />
-        </property>
-        <property name="materialQtdeDisponivel" type="java.lang.Integer">
-            <column name="material_qtde_disponivel" />
-        </property>
-        <set name="materiaisAgendamentoses" inverse="true">
-            <key>
-                <column name="material_id" not-null="true" />
-            </key>
-            <one-to-many class="unatec.ads.ess.entidadeDao.MateriaisAgendamentos" />
-        </set>
-    </class>
+  <class catalog="ess_homolog" name="unatec.ads.ess.entidadeDao.Materiais" table="materiais">
+    <id name="materialId" type="java.lang.Integer">
+      <column name="material_id"/>
+      <generator class="identity"/>
+    </id>
+    <property name="materialDescricao" type="string">
+      <column name="material_descricao"/>
+    </property>
+    <property name="materialQtdeDisponivel" type="java.lang.Integer">
+      <column name="material_qtde_disponivel"/>
+    </property>
+    <set inverse="true" name="materiaisAgendamentoses">
+      <key>
+        <column name="material_id" not-null="true"/>
+      </key>
+      <one-to-many class="unatec.ads.ess.entidadeDao.MateriaisAgendamentos"/>
+    </set>
+  </class>
 </hibernate-mapping>

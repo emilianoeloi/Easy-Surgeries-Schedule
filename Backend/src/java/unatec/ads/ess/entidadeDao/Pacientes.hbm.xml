@@ -1,21 +1,20 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 29/10/2013 20:49:09 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="unatec.ads.ess.entidadeDao.Pacientes" table="pacientes" catalog="ess_homolog">
-        <id name="pacienteId" type="java.lang.Integer">
-            <column name="paciente_id" />
-            <generator class="identity" />
-        </id>
-        <many-to-one name="pessoas" class="unatec.ads.ess.entidadeDao.Pessoas" fetch="select">
-            <column name="pessoa_id" not-null="true" />
-        </many-to-one>
-        <set name="agendamentoses" inverse="true">
-            <key>
-                <column name="paciente_id" not-null="true" />
-            </key>
-            <one-to-many class="unatec.ads.ess.entidadeDao.Agendamentos" />
-        </set>
-    </class>
+  <class catalog="ess_homolog" name="unatec.ads.ess.entidadeDao.Pacientes" table="pacientes">
+    <id name="pacienteId" type="java.lang.Integer">
+      <column name="paciente_id"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="unatec.ads.ess.entidadeDao.Pessoas" fetch="select" name="pessoas">
+      <column name="pessoa_id" not-null="true"/>
+    </many-to-one>
+    <set inverse="true" name="agendamentoses">
+      <key>
+        <column name="paciente_id" not-null="true"/>
+      </key>
+      <one-to-many class="unatec.ads.ess.entidadeDao.Agendamentos"/>
+    </set>
+  </class>
 </hibernate-mapping>

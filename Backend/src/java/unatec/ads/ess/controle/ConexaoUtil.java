@@ -17,7 +17,7 @@ import unatec.ads.ess.entidadeDao.Pessoas;
  */
 public class ConexaoUtil {
 
-    private static Session s = HibernateUtil.getSessionFactory().openSession();
+    private static Session s = HibernateUtil.getSessionFactory().openSession(); 
 
     public static List<Object> autenticaLogin(Class objClass, String email,int password) {
 

@@ -38,8 +38,8 @@ public class Aplicacao extends Application{
      * given list with all resources defined in the project.
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(unatec.ads.ess.servicos.equipamento.ServicoEquipamento.class);
-        resources.add(unatec.ads.ess.servicos.equipamento.ServicosLogin.class);
+        resources.add(unatec.ads.ess.servicos.ServicoEquipamento.class);
+        resources.add(unatec.ads.ess.servicos.ServicosLogin.class);
     }
     
 }
