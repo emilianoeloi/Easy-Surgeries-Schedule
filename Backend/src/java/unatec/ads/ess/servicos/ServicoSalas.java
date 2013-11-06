@@ -16,60 +16,61 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import unatec.ads.ess.controle.ConexaoUtil;
 import unatec.ads.ess.entidadeDao.Procedimentos;
+import unatec.ads.ess.entidadeDao.Salas;
 
 /**
  *
  * @author user
  */
 
-@Path("/procedimentos")
-public class ServicoProcedimento {
+@Path("/salas")
+public class ServicoSalas {
     
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Procedimentos inserir(@FormParam("descricao")String descricao){
+    public Salas inserir(@FormParam("descricao")String descricao){
         
-        Procedimentos procedimentos = new Procedimentos(descricao, null);
+        Salas salas = new Salas(descricao, null);
         
-        ConexaoUtil.inserir(procedimentos);
+        ConexaoUtil.inserir(salas);
         
-        return procedimentos;
+        return salas;
     }
     
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
-    public Procedimentos updateProcedimentos(@FormParam("id")int id,
+    public Salas updateSalas(@FormParam("id")int id,
                                            @FormParam("descricao")String descricao){
          
         
-        Procedimentos procedimentos = (Procedimentos)ConexaoUtil.selecionar(Procedimentos.class, id);
-        procedimentos.setProcedimentoDescricao(descricao);
+        Salas salas = (Salas)ConexaoUtil.selecionar(Salas.class, id);
+        salas.setSalaNumero(descricao);
         
         
-        ConexaoUtil.atualizar(procedimentos);
+        ConexaoUtil.atualizar(salas);
         
-        return procedimentos;
+        return salas;
     }
     
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
-    public Procedimentos deleteProcedimentos(@FormParam("id")int id){
+    public Salas deleteSalas(@FormParam("id")int id){
          
         
-        Procedimentos procedimentos = (Procedimentos)ConexaoUtil.selecionar(Procedimentos.class, id);
+        Salas salas = (Salas)ConexaoUtil.selecionar(Salas.class, id);
         
         
-        ConexaoUtil.excluir(procedimentos);
+        ConexaoUtil.excluir(salas);
         
-        return procedimentos;
+        return salas;
     }
     
     @GET
     @Path("/{_id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Procedimentos get(@PathParam("_id") int id){
+    public Salas get(@PathParam("_id") int id){
          
-        return (Procedimentos)ConexaoUtil.selecionar(Procedimentos.class, id);
+        return (Salas)ConexaoUtil.selecionar(Salas.class, id);
         
     }
     
@@ -77,7 +78,7 @@ public class ServicoProcedimento {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Procedimentos> lista(){
          
-        List lista = ConexaoUtil.listar(Procedimentos.class);
+        List lista = ConexaoUtil.listar(Salas.class);
         
         return lista;
     }
