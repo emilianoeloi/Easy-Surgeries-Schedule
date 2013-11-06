@@ -53,7 +53,7 @@ public class ServicoProcedimento {
     
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
-    public Procedimentos deleteProcedimentos(@FormParam("id")int id){
+    public boolean deleteProcedimentos(@FormParam("id")int id){
          
         
         Procedimentos procedimentos = (Procedimentos)ConexaoUtil.selecionar(Procedimentos.class, id);
@@ -61,7 +61,7 @@ public class ServicoProcedimento {
         
         ConexaoUtil.excluir(procedimentos);
         
-        return procedimentos;
+        return true;
     }
     
     @GET

@@ -15,7 +15,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import unatec.ads.ess.controle.ConexaoUtil;
-import unatec.ads.ess.entidadeDao.Procedimentos;
 import unatec.ads.ess.entidadeDao.Salas;
 
 /**
@@ -54,7 +53,7 @@ public class ServicoSalas {
     
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
-    public Salas deleteSalas(@FormParam("id")int id){
+    public boolean deleteSalas(@FormParam("id")int id){
          
         
         Salas salas = (Salas)ConexaoUtil.selecionar(Salas.class, id);
@@ -62,7 +61,7 @@ public class ServicoSalas {
         
         ConexaoUtil.excluir(salas);
         
-        return salas;
+        return true;
     }
     
     @GET
@@ -76,7 +75,7 @@ public class ServicoSalas {
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Procedimentos> lista(){
+    public List<Salas> lista(){
          
         List lista = ConexaoUtil.listar(Salas.class);
         
