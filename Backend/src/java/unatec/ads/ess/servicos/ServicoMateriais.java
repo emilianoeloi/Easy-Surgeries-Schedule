@@ -15,52 +15,56 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import unatec.ads.ess.controle.ConexaoUtil;
-import unatec.ads.ess.entidadeDao.Equipamentos;
+import unatec.ads.ess.entidadeDao.Materiais;
+import unatec.ads.ess.entidadeDao.Procedimentos;
+import unatec.ads.ess.entidadeDao.Salas;
+
 
 /**
  *
  * @author user
  */
 
-@Path("/equipamentos")
-public class ServicoEquipamento {
+@Path("/materiais")
+public class ServicoMateriais {
     
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Equipamentos inserir(@FormParam("descricao")String descricao,@FormParam("qtd")int qtd){
+    public Materiais inserir(@FormParam("descricao")String descricao,
+                             @FormParam("qtd")int qtd){
         
-        Equipamentos equipamentos = new Equipamentos(descricao, qtd, null);
+        Materiais materiais = new Materiais(descricao, qtd, null);
         
-        ConexaoUtil.inserir(equipamentos);
+        ConexaoUtil.inserir(materiais);
         
-        return equipamentos;
+        return materiais;
     }
     
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
-    public Equipamentos updateEquipamentos(@FormParam("id")int id,
+    public Materiais updateMateriais(@FormParam("id")int id,
                                            @FormParam("descricao")String descricao,
                                            @FormParam("qtd")int qtd){
          
         
-        Equipamentos equipamentos = (Equipamentos)ConexaoUtil.selecionar(Equipamentos.class, id);
-        equipamentos.setEquipamentoDescricao(descricao);
-        equipamentos.setEquipamentoQtdeDisponivel(qtd);
+        Materiais materiais = (Materiais)ConexaoUtil.selecionar(Materiais.class, id);
+        materiais.setMaterialDescricao(descricao);
+        materiais.setMaterialQtdeDisponivel(qtd);
         
-        ConexaoUtil.atualizar(equipamentos);
+        ConexaoUtil.atualizar(materiais);
         
-        return equipamentos;
+        return materiais;
     }
     
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
-    public boolean deleteEquipamentos(@FormParam("id")int id){
+    public boolean deleteMateriais(@FormParam("id")int id){
          
         
-        Equipamentos equipamentos = (Equipamentos)ConexaoUtil.selecionar(Equipamentos.class, id);
+        Materiais materiais = (Materiais)ConexaoUtil.selecionar(Materiais.class, id);
         
         
-        ConexaoUtil.excluir(equipamentos);
+        ConexaoUtil.excluir(materiais);
         
         return true;
     }
@@ -68,17 +72,17 @@ public class ServicoEquipamento {
     @GET
     @Path("/{_id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Equipamentos get(@PathParam("_id") int id){
+    public Materiais get(@PathParam("_id") int id){
          
-        return (Equipamentos)ConexaoUtil.selecionar(Equipamentos.class, id);
+        return (Materiais)ConexaoUtil.selecionar(Materiais.class, id);
         
     }
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Equipamentos> lista(){
+    public List<Materiais> lista(){
          
-        List lista = ConexaoUtil.listar(Equipamentos.class);
+        List lista = ConexaoUtil.listar(Materiais.class);
         
         return lista;
     }

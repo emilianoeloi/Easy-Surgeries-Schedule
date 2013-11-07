@@ -39,6 +39,10 @@ public class Aplicacao extends Application{
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(unatec.ads.ess.servicos.ServicoEquipamento.class);
+        resources.add(unatec.ads.ess.servicos.ServicoMateriais.class);
+        resources.add(unatec.ads.ess.servicos.ServicoMedicos.class);
+        resources.add(unatec.ads.ess.servicos.ServicoProcedimento.class);
+        resources.add(unatec.ads.ess.servicos.ServicoSalas.class);
         resources.add(unatec.ads.ess.servicos.ServicosLogin.class);
     }
     
