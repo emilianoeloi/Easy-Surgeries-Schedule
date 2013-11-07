@@ -21,64 +21,44 @@ import unatec.ads.ess.entidadeDao.Salas;
  *
  * @author user
  */
-
 @Path("/salas")
 public class ServicoSalas {
-    
+
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Salas inserir(@FormParam("descricao")String descricao){
-        
-        Salas salas = new Salas(descricao, null);
-        
+    public Salas inserir(@FormParam("numero") String numero) {
+        Salas salas = new Salas(numero, null);
         ConexaoUtil.inserir(salas);
-        
         return salas;
     }
-    
+
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
-    public Salas updateSalas(@FormParam("id")int id,
-                                           @FormParam("descricao")String descricao){
-         
-        
-        Salas salas = (Salas)ConexaoUtil.selecionar(Salas.class, id);
-        salas.setSalaNumero(descricao);
-        
-        
+    public Salas updateSalas(@FormParam("id") int id,
+            @FormParam("numero") String numero) {
+        Salas salas = (Salas) ConexaoUtil.selecionar(Salas.class, id);
+        salas.setSalaNumero(numero);
         ConexaoUtil.atualizar(salas);
-        
         return salas;
     }
-    
+
     @DELETE
-    @Produces(MediaType.APPLICATION_JSON)
-    public boolean deleteSalas(@FormParam("id")int id){
-         
-        
-        Salas salas = (Salas)ConexaoUtil.selecionar(Salas.class, id);
-        
-        
+    public void deleteSalas(@FormParam("id") int id) {
+        Salas salas = (Salas) ConexaoUtil.selecionar(Salas.class, id);
         ConexaoUtil.excluir(salas);
-        
-        return true;
     }
-    
+
     @GET
     @Path("/{_id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Salas get(@PathParam("_id") int id){
-         
-        return (Salas)ConexaoUtil.selecionar(Salas.class, id);
-        
+    public Salas get(@PathParam("_id") int id) {
+        return (Salas) ConexaoUtil.selecionar(Salas.class, id);
     }
-    
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Salas> lista(){
-         
+    public List<Salas> lista() {
         List lista = ConexaoUtil.listar(Salas.class);
-        
         return lista;
     }
 }

@@ -2,25 +2,25 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-var Equipamentos = function(){
+var Salas = function(){
     self = this;
-    this.equipamento = null;
-    this.servico = "/Backend/agenda/equipamentos";
-    this.paginaLista = "/Backend/equipamentoLista.html";
-    this.paginaCadastro = "/Backend/equipamentoCadastro.html";
-    this.paginaEdicao = "/Backend/equipamentoCadastro.html?id={_id}";
+    this.sala = null;
+    this.servico = "/Backend/agenda/salas";
+    this.paginaLista = "/Backend/salaLista.html";
+    this.paginaCadastro = "/Backend/salaCadastro.html";
+    this.paginaEdicao = "/Backend/salaCadastro.html?id={_id}";
     this.templateLista = null;
-    this.prefix = "equipamento";
+    this.prefix = "sala";
     this.form = null;
 };
-Equipamentos.prototype = {
+Salas.prototype = {
     Initilize : function(){
-        this.form = $(".equipamentos");
-        processamento.iniciar('equipamentos-template-lista');
-        requisicaoAjax("assets/template/equipamentos-lista.html", "get", {}, 
+        this.form = $(".salas");
+        processamento.iniciar('salas-template-lista');
+        requisicaoAjax("assets/template/salas-lista.html", "get", {}, 
             function(data){
                 self.templateLista = data;
-                processamento.terminar('equipamentos-template-lista');
+                processamento.terminar('salas-template-lista');
             }, 
             function(data){
             // Error
@@ -34,19 +34,18 @@ Equipamentos.prototype = {
         self.form.attr('action', self.servico);
         switch(metodo){
             case 'put':
-                processamento.terminar('equipamentos');
+                processamento.terminar('salas');
                 requisicaoAjax(this.servico+"/"+self.getQuerystringId(), "get", {}, 
                     function(data){
                         if(data){
                             $("#id").val(data[self.prefix + "Id"]);
-                            $("#descricao").val(data[self.prefix + "Descricao"]);
-                            $("#qtd").val(data[self.prefix + "QtdeDisponivel"]);
+                            $("#numero").val(data[self.prefix + "Numero"]);
                         }
                         self.form.bind('submit', function(){
-                            equipamentos.atualizar();
+                            salas.atualizar();
                             return false;
                         });
-                        processamento.terminar('equipamentos');
+                        processamento.terminar('salas');
                     }, 
                     function(data){
                     //error
@@ -55,7 +54,7 @@ Equipamentos.prototype = {
             case 'post':
             default:
                 self.form.bind('submit', function(){
-                    equipamentos.cadastrar();
+                    salas.cadastrar();
                     return false;
                 });
                 break;
@@ -63,29 +62,30 @@ Equipamentos.prototype = {
         }
     },
     listar : function(){
-        processamento.iniciar('equipamentos');
+        processamento.iniciar('salas');
         requisicaoAjax(this.servico, "get", {}, 
             function(data){
+                console.log('data', data.salas);
                 var htmlLista = [];
                 var odd = true;
-                $('.equipamentos .rows').remove();
-                for(var equipamento in data.equipamentos){
-                    var item = data.equipamentos[equipamento];
+                $('.salas .rows').remove();
+                for(var sala in data.salas){
+                    var item = data.salas[sala];
+                    console.log('item', item);
                     htmlLista.push(self.templateLista.replaceAll('{id}', item[self.prefix + "Id"])
-                        .replaceAll('{descricao}', item[self.prefix + "Descricao"])
-                        .replaceAll('{qtde}', item[self.prefix + "QtdeDisponivel"])
+                        .replaceAll('{numero}', item[self.prefix + "Numero"])
                         .replaceAll('{odd}', (odd)?'pure-table-odd':''));
                     odd = !odd;                                 
                     
                 }
                 var html = $.parseHTML(htmlLista.join(''));
-                $('.equipamentos tbody').append(html);
-                $(".equipamentos .delete").bind('click', function(){
+                $('.salas tbody').append(html);
+                $(".salas .delete").bind('click', function(){
                     if(confirm('Excluir?')){
                         self.excluir($(this).data("id"));
                     }
                 });
-                processamento.terminar('equipamentos');
+                processamento.terminar('salas');
             }, 
             function(data){
             //error
@@ -95,35 +95,35 @@ Equipamentos.prototype = {
         
     },
     atualizar : function(){
-        processamento.iniciar('equipamentos');
+        processamento.iniciar('salas');
         requisicaoAjax(this.servico, "put", self.form.serialize(), 
             function(data){
                 document.location.href = self.paginaLista;
                 console.log('data', data);
-                processamento.terminar('equipamentos');
+                processamento.terminar('salas');
             }, 
             function(data){
             //error
             });
     }, 
     cadastrar : function(){
-        processamento.iniciar('equipamentos');
+        processamento.iniciar('salas');
         requisicaoAjax(this.servico, "post", self.form.serialize(), 
             function(data){
                 document.location.href = self.paginaLista;
                 console.log('data', data);
-                processamento.terminar('equipamentos');
+                processamento.terminar('salas');
             }, 
             function(data){
             //error
             });
     },
     excluir : function(id){
-        processamento.iniciar('equipamentos');
+        processamento.iniciar('salas');
         requisicaoAjax(this.servico, "delete", {"id":id}, 
             function(data){
                 self.listar();
-                processamento.terminar('equipamentos');
+                processamento.terminar('salas');
             }, 
             function(data){
             //error
@@ -131,27 +131,27 @@ Equipamentos.prototype = {
     }
 };
 
-Equipamentos.Load = function(){
-    var _data = new Equipamentos();
+Salas.Load = function(){
+    var _data = new Salas();
     _data.Initilize();
     return _data;
 };
-var equipamentos = Equipamentos.Load();
+var salas = Salas.Load();
 
-$(document).on('submit', '.equipamentos', function(){
-    equipamentos.cadastrar();
+$(document).on('submit', '.salas', function(){
+    salas.cadastrar();
     return false;
 });
 
 $(document).ready(function(){
     var pagina = document.location.href;
     if(pagina.indexOf('Cadastro') > -1 && pagina.indexOf('?id=') > -1){
-        equipamentos.prepararFormulario("put");
+        salas.prepararFormulario("put");
     }else if(pagina.indexOf('Cadastro') > -1){
-        equipamentos.prepararFormulario("post");
+        salas.prepararFormulario("post");
         
     }else if(pagina.indexOf('Lista') > -1){
-        equipamentos.listar();
+        salas.listar();
     }
 })
 

@@ -2,25 +2,25 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-var Equipamentos = function(){
+var Materiais = function(){
     self = this;
-    this.equipamento = null;
-    this.servico = "/Backend/agenda/equipamentos";
-    this.paginaLista = "/Backend/equipamentoLista.html";
-    this.paginaCadastro = "/Backend/equipamentoCadastro.html";
-    this.paginaEdicao = "/Backend/equipamentoCadastro.html?id={_id}";
+    this.material = null;
+    this.servico = "/Backend/agenda/materiais";
+    this.paginaLista = "/Backend/materialLista.html";
+    this.paginaCadastro = "/Backend/materialCadastro.html";
+    this.paginaEdicao = "/Backend/materialCadastro.html?id={_id}";
     this.templateLista = null;
-    this.prefix = "equipamento";
+    this.prefix = "material";
     this.form = null;
 };
-Equipamentos.prototype = {
+Materiais.prototype = {
     Initilize : function(){
-        this.form = $(".equipamentos");
-        processamento.iniciar('equipamentos-template-lista');
-        requisicaoAjax("assets/template/equipamentos-lista.html", "get", {}, 
+        this.form = $(".materiais");
+        processamento.iniciar('materiais-template-lista');
+        requisicaoAjax("assets/template/materiais-lista.html", "get", {}, 
             function(data){
                 self.templateLista = data;
-                processamento.terminar('equipamentos-template-lista');
+                processamento.terminar('materiais-template-lista');
             }, 
             function(data){
             // Error
@@ -34,7 +34,7 @@ Equipamentos.prototype = {
         self.form.attr('action', self.servico);
         switch(metodo){
             case 'put':
-                processamento.terminar('equipamentos');
+                processamento.terminar('materiais');
                 requisicaoAjax(this.servico+"/"+self.getQuerystringId(), "get", {}, 
                     function(data){
                         if(data){
@@ -43,10 +43,10 @@ Equipamentos.prototype = {
                             $("#qtd").val(data[self.prefix + "QtdeDisponivel"]);
                         }
                         self.form.bind('submit', function(){
-                            equipamentos.atualizar();
+                            materiais.atualizar();
                             return false;
                         });
-                        processamento.terminar('equipamentos');
+                        processamento.terminar('materiais');
                     }, 
                     function(data){
                     //error
@@ -55,7 +55,7 @@ Equipamentos.prototype = {
             case 'post':
             default:
                 self.form.bind('submit', function(){
-                    equipamentos.cadastrar();
+                    materiais.cadastrar();
                     return false;
                 });
                 break;
@@ -63,14 +63,15 @@ Equipamentos.prototype = {
         }
     },
     listar : function(){
-        processamento.iniciar('equipamentos');
+        processamento.iniciar('materiais');
         requisicaoAjax(this.servico, "get", {}, 
             function(data){
+                console.log('listar', data);
                 var htmlLista = [];
                 var odd = true;
-                $('.equipamentos .rows').remove();
-                for(var equipamento in data.equipamentos){
-                    var item = data.equipamentos[equipamento];
+                $('.materiais .rows').remove();
+                for(var material in data.materiais){
+                    var item = data.materiais[material];
                     htmlLista.push(self.templateLista.replaceAll('{id}', item[self.prefix + "Id"])
                         .replaceAll('{descricao}', item[self.prefix + "Descricao"])
                         .replaceAll('{qtde}', item[self.prefix + "QtdeDisponivel"])
@@ -79,13 +80,13 @@ Equipamentos.prototype = {
                     
                 }
                 var html = $.parseHTML(htmlLista.join(''));
-                $('.equipamentos tbody').append(html);
-                $(".equipamentos .delete").bind('click', function(){
+                $('.materiais tbody').append(html);
+                $(".materiais .delete").bind('click', function(){
                     if(confirm('Excluir?')){
                         self.excluir($(this).data("id"));
                     }
                 });
-                processamento.terminar('equipamentos');
+                processamento.terminar('materiais');
             }, 
             function(data){
             //error
@@ -95,35 +96,35 @@ Equipamentos.prototype = {
         
     },
     atualizar : function(){
-        processamento.iniciar('equipamentos');
+        processamento.iniciar('materiais');
         requisicaoAjax(this.servico, "put", self.form.serialize(), 
             function(data){
                 document.location.href = self.paginaLista;
                 console.log('data', data);
-                processamento.terminar('equipamentos');
+                processamento.terminar('materiais');
             }, 
             function(data){
             //error
             });
     }, 
     cadastrar : function(){
-        processamento.iniciar('equipamentos');
+        processamento.iniciar('materiais');
         requisicaoAjax(this.servico, "post", self.form.serialize(), 
             function(data){
                 document.location.href = self.paginaLista;
                 console.log('data', data);
-                processamento.terminar('equipamentos');
+                processamento.terminar('materiais');
             }, 
             function(data){
             //error
             });
     },
     excluir : function(id){
-        processamento.iniciar('equipamentos');
+        processamento.iniciar('materiais');
         requisicaoAjax(this.servico, "delete", {"id":id}, 
             function(data){
                 self.listar();
-                processamento.terminar('equipamentos');
+                processamento.terminar('materiais');
             }, 
             function(data){
             //error
@@ -131,27 +132,27 @@ Equipamentos.prototype = {
     }
 };
 
-Equipamentos.Load = function(){
-    var _data = new Equipamentos();
+Materiais.Load = function(){
+    var _data = new Materiais();
     _data.Initilize();
     return _data;
 };
-var equipamentos = Equipamentos.Load();
+var materiais = Materiais.Load();
 
-$(document).on('submit', '.equipamentos', function(){
-    equipamentos.cadastrar();
+$(document).on('submit', '.materiais', function(){
+    materiais.cadastrar();
     return false;
 });
 
 $(document).ready(function(){
     var pagina = document.location.href;
     if(pagina.indexOf('Cadastro') > -1 && pagina.indexOf('?id=') > -1){
-        equipamentos.prepararFormulario("put");
+        materiais.prepararFormulario("put");
     }else if(pagina.indexOf('Cadastro') > -1){
-        equipamentos.prepararFormulario("post");
+        materiais.prepararFormulario("post");
         
     }else if(pagina.indexOf('Lista') > -1){
-        equipamentos.listar();
+        materiais.listar();
     }
 })
 
