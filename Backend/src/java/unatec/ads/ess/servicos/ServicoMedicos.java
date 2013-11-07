@@ -37,13 +37,13 @@ public class ServicoMedicos {
                            @FormParam("login")String login,
                            @FormParam("senha")String senha,
                            @FormParam("crm")String crm,
-                           @FormParam("id_especialidades")int idEspecialidades){
+                           @FormParam("id-especialidade")int idEspecialidade){
         
         Pessoas pessoaMedico = new Pessoas(nome, email, telefone, login, senha, null, null, null);
         ConexaoUtil.inserir(pessoaMedico);
                       
         Especialidades especialidade = new Especialidades();
-        especialidade.setEspecialidadeId(idEspecialidades);
+        especialidade.setEspecialidadeId(idEspecialidade);
         
         Medicos medicos = new Medicos(pessoaMedico, especialidade, crm, null);
         ConexaoUtil.inserir(medicos);
@@ -54,13 +54,25 @@ public class ServicoMedicos {
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     public Medicos updateMedicos(@FormParam("id")int id,
-                                 @FormParam("crm")String crm){
+                           @FormParam("nome")String nome,
+                           @FormParam("email")String email,
+                           @FormParam("telefone")String telefone,
+                           @FormParam("login")String login,
+                           @FormParam("senha")String senha,
+                           @FormParam("crm")String crm,
+                           @FormParam("id-especialidade")int idEspecialidade){
                                           
          
         
         Medicos medicos = (Medicos)ConexaoUtil.selecionar(Medicos.class, id);
         medicos.setMedicoCrm(crm);
         
+        Pessoas p = medicos.getPessoas();
+        p.setPessoaNome(nome);
+        p.setPessoaEmail(email);
+        p.setPessoaTelefone(telefone);
+        p.setPessoaLogin(login);
+        p.setPessoaSenhaHash(senha);
         
         ConexaoUtil.atualizar(medicos);
         
@@ -68,16 +80,9 @@ public class ServicoMedicos {
     }
     
     @DELETE
-    @Produces(MediaType.APPLICATION_JSON)
-    public boolean deleteMedicos(@FormParam("id")int id){
-         
-        
+    public void deleteMedicos(@FormParam("id")int id){
         Medicos medicos = (Medicos)ConexaoUtil.selecionar(Medicos.class, id);
-        
-        
         ConexaoUtil.excluir(medicos);
-        
-        return true;
     }
     
     @GET
@@ -92,9 +97,7 @@ public class ServicoMedicos {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Medicos> lista(){
-         
         List lista = ConexaoUtil.listar(Medicos.class);
-        
         return lista;
     }
 }

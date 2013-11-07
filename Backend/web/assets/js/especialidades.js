@@ -91,7 +91,20 @@ Especialidades.prototype = {
             //error
             });
     },
-    get : function(){
+    get : function(id, funcaoCallback){
+        if(id){
+            requisicaoAjax(this.servico + '/' + id, "get", self.form.serialize(), 
+                funcaoCallback, 
+                function(data){
+                //error
+                });
+        }else{
+            requisicaoAjax(this.servico, "get", self.form.serialize(), 
+                funcaoCallback, 
+                function(data){
+                //error
+                });
+        }
         
     },
     atualizar : function(){
@@ -145,13 +158,15 @@ $(document).on('submit', '.especialidades', function(){
 
 $(document).ready(function(){
     var pagina = document.location.href;
-    if(pagina.indexOf('Cadastro') > -1 && pagina.indexOf('?id=') > -1){
-        especialidades.prepararFormulario("put");
-    }else if(pagina.indexOf('Cadastro') > -1){
-        especialidades.prepararFormulario("post");
-        
-    }else if(pagina.indexOf('Lista') > -1){
-        especialidades.listar();
+    if(pagina.indexOf('especialidade') > -1){
+        if(pagina.indexOf('Cadastro') > -1 && pagina.indexOf('?id=') > -1){
+            especialidades.prepararFormulario("put");
+        }else if(pagina.indexOf('Cadastro') > -1){
+            especialidades.prepararFormulario("post");
+
+        }else if(pagina.indexOf('Lista') > -1){
+            especialidades.listar();
+        }
     }
-})
+});
 

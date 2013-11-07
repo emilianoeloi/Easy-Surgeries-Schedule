@@ -2,25 +2,25 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-var Salas = function(){
+var Medicos = function(){
     self = this;
-    this.sala = null;
-    this.servico = "/Backend/agenda/salas";
-    this.paginaLista = "/Backend/salaLista.html";
-    this.paginaCadastro = "/Backend/salaCadastro.html";
-    this.paginaEdicao = "/Backend/salaCadastro.html?id={_id}";
+    this.medico = null;
+    this.servico = "/Backend/agenda/medicos";
+    this.paginaLista = "/Backend/medicoLista.html";
+    this.paginaCadastro = "/Backend/medicoCadastro.html";
+    this.paginaEdicao = "/Backend/medicoCadastro.html?id={_id}";
     this.templateLista = null;
-    this.prefix = "sala";
+    this.prefix = "medico";
     this.form = null;
 };
-Salas.prototype = {
+Medicos.prototype = {
     Initilize : function(){
-        this.form = $(".salas");
-        processamento.iniciar('salas-template-lista');
-        requisicaoAjax("assets/template/salas-lista.html", "get", {}, 
+        this.form = $(".medicos");
+        processamento.iniciar('medicos-template-lista');
+        requisicaoAjax("assets/template/medicos-lista.html", "get", {}, 
             function(data){
                 self.templateLista = data;
-                processamento.terminar('salas-template-lista');
+                processamento.terminar('medicos-template-lista');
             }, 
             function(data){
             // Error
@@ -34,18 +34,20 @@ Salas.prototype = {
         self.form.attr('action', self.servico);
         switch(metodo){
             case 'put':
-                processamento.terminar('salas');
+                processamento.terminar('medicos');
                 requisicaoAjax(this.servico+"/"+self.getQuerystringId(), "get", {}, 
                     function(data){
                         if(data){
                             $("#id").val(data[self.prefix + "Id"]);
-                            $("#numero").val(data[self.prefix + "Numero"]);
+                            $("#nome").val(data[self.prefix + "Nome"]);
+                            self.carregarComboEspecialidades(data[self.prefix + "Id"]);
                         }
+                        
                         self.form.bind('submit', function(){
-                            salas.atualizar();
+                            medicos.atualizar();
                             return false;
                         });
-                        processamento.terminar('salas');
+                        processamento.terminar('medicos');
                     }, 
                     function(data){
                     //error
@@ -53,39 +55,62 @@ Salas.prototype = {
                 break;
             case 'post':
             default:
+                self.carregarComboEspecialidades(null);
                 self.form.bind('submit', function(){
-                    salas.cadastrar();
+                    medicos.cadastrar();
                     return false;
                 });
                 break;
                 
         }
     },
+    carregarComboEspecialidades : function(id){
+        especialidades.get(id, function(data){
+            var htmlCombo = [];
+            htmlCombo.push('<select id="id-especialidade" name="id-especialidade">');
+            htmlCombo.push('<option>-selecione-</option>');
+            var prefix = especialidades.prefix;
+            for(var especialidade in data.especialidades){
+                var item = data.especialidades[especialidade];
+                htmlCombo.push('<option value="');
+                htmlCombo.push(item[prefix + "Id"]);
+                if(id && id == item[prefix + "Id"])
+                    htmlCombo.push(' selected ');
+                htmlCombo.push('" >');
+                htmlCombo.push(item[prefix + "Nome"]);
+                htmlCombo.push('</option>');
+            }
+            htmlCombo.push('</select>');
+            var html = $.parseHTML(htmlCombo.join('')); 
+            $("#id-especialidade").remove();
+            $(".label-id-especialidade").after(html);
+        });
+    },
     listar : function(){
-        processamento.iniciar('salas');
+        processamento.iniciar('medicos');
         requisicaoAjax(this.servico, "get", {}, 
             function(data){
-                console.log('data', data.salas);
+                console.log('data', data.medicos);
                 var htmlLista = [];
                 var odd = true;
-                $('.salas .rows').remove();
-                for(var sala in data.salas){
-                    var item = data.salas[sala];
+                $('.medicos .rows').remove();
+                for(var medico in data.medicos){
+                    var item = data.medicos[medico];
                     console.log('item', item);
                     htmlLista.push(self.templateLista.replaceAll('{id}', item[self.prefix + "Id"])
-                        .replaceAll('{numero}', item[self.prefix + "Numero"])
+                        .replaceAll('{nome}', item[self.prefix + "Nome"])
                         .replaceAll('{odd}', (odd)?'pure-table-odd':''));
                     odd = !odd;                                 
                     
                 }
                 var html = $.parseHTML(htmlLista.join(''));
-                $('.salas tbody').append(html);
-                $(".salas .delete").bind('click', function(){
+                $('.medicos tbody').append(html);
+                $(".medicos .delete").bind('click', function(){
                     if(confirm('Excluir?')){
                         self.excluir($(this).data("id"));
                     }
                 });
-                processamento.terminar('salas');
+                processamento.terminar('medicos');
             }, 
             function(data){
             //error
@@ -95,63 +120,66 @@ Salas.prototype = {
         
     },
     atualizar : function(){
-        processamento.iniciar('salas');
+        processamento.iniciar('medicos');
         requisicaoAjax(this.servico, "put", self.form.serialize(), 
             function(data){
                 document.location.href = self.paginaLista;
                 console.log('data', data);
-                processamento.terminar('salas');
+                processamento.terminar('medicos');
             }, 
             function(data){
             //error
             });
     }, 
     cadastrar : function(){
-        processamento.iniciar('salas');
+        processamento.iniciar('medicos');
+        console.log('dados',self.form.serialize());
         requisicaoAjax(this.servico, "post", self.form.serialize(), 
             function(data){
                 document.location.href = self.paginaLista;
                 console.log('data', data);
-                processamento.terminar('salas');
+                processamento.terminar('medicos');
             }, 
             function(data){
             //error
             });
     },
     excluir : function(id){
-        processamento.iniciar('salas');
-        requisicaoAjax(this.servico, "delete", {"id":id}, 
-            function(data){
-                self.listar();
-                processamento.terminar('salas');
-            }, 
-            function(data){
+        processamento.iniciar('medicos');
+        requisicaoAjax(this.servico, "delete", {
+            "id":id
+        }, 
+        function(data){
+            self.listar();
+            processamento.terminar('medicos');
+        }, 
+        function(data){
             //error
             });
     }
 };
 
-Salas.Load = function(){
-    var _data = new Salas();
+Medicos.Load = function(){
+    var _data = new Medicos();
     _data.Initilize();
     return _data;
 };
-var salas = Salas.Load();
+var medicos = Medicos.Load();
 
-$(document).on('submit', '.salas', function(){
-    salas.cadastrar();
+$(document).on('submit', '.medicos', function(){
+    medicos.cadastrar();
     return false;
 });
 
 $(document).ready(function(){
     var pagina = document.location.href;
     if(pagina.indexOf('Cadastro') > -1 && pagina.indexOf('?id=') > -1){
-        salas.prepararFormulario("put");
+        medicos.prepararFormulario("put");
     }else if(pagina.indexOf('Cadastro') > -1){
-        salas.prepararFormulario("post");
+        medicos.prepararFormulario("post");
         
     }else if(pagina.indexOf('Lista') > -1){
-        salas.listar();
+        medicos.listar();
     }
 })
 
