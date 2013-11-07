@@ -24,44 +24,36 @@
             <br />
             <div class="middle">
 
-                <div id="conteudo" class="container">
+		<div id="conteudo" class="container">
 			<main class="content">
 				
-            <form class="pure-form pure-form-stacked">
+            <form class="pure-form pure-form-stacked equipamentos">
             <fieldset>
-            <legend>Equipamentos -  Lista</legend>
-            </fieldset>
-            </form>
+            <legend>Cadastro de Equipamentos</legend>
+    
+            	<div class="pure-g-r">
+                <div class="pure-u-1-3">
+                    <label for="descricao">Descrição</label>
+                    <input id="descricao" name="descricao" type="text">
+                </div>
+    
+                <div class="pure-u-1-3">
+                    <label for="qtde">Qtde</label>
+                    <input id="qtd" name="qtd" type="number">
+                </div>
+    
                 
-           <table class="pure-table equipamentos">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Nome</th>
-            <th>Quantidade</th>
-            <th>Editar</th>
-            <th>Deletar</th>
+            	</div>
             
-        </tr>
-    </thead>
-
-    <tbody>
+            <br/>
+    
+            <button type="submit" class="pure-button pure-button-primary">Gravar</button>
         
-    </tbody>
-</table>
-
-<br/>
-
-<a class="pure-button pure-button-primary" href="equipamentoCadastro.html">Cadastrar</a>
-
-    <style scoped>
-        .pure-button-xsmall {
-            font-size: 70%;
-        }
-    </style>
+        		</fieldset>
+        		</form>
                 
 			</main><!-- .content -->
-                </div><!-- .container-->
+		</div><!-- .container-->
 
                 <span class="menu"></span>	
 

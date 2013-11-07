@@ -27,9 +27,10 @@ public class ServicoEquipamento {
     
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Equipamentos inserir(@FormParam("descricao")String descricao,@FormParam("qtd")int qtd){
+    public Equipamentos inserir(@FormParam("descricao")String descricao,@FormParam("qtd")String qtd){
         
-        Equipamentos equipamentos = new Equipamentos(descricao, qtd, null);
+        int qtde = Integer.parseInt(qtd);
+        Equipamentos equipamentos = new Equipamentos(descricao, qtde, null);
         
         ConexaoUtil.inserir(equipamentos);
         
