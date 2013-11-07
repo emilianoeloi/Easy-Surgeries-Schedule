@@ -31,15 +31,21 @@ public class ServicoMedicos {
     
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Medicos inserir(@FormParam("crm")String crm,
-                           @FormParam("id_pessoas")int id_pessoas,
-                           @FormParam("id_especialidades")int id_especialidades){
+    public Medicos inserir(@FormParam("nome")String nome,
+                           @FormParam("email")String email,
+                           @FormParam("telefone")String telefone,
+                           @FormParam("login")String login,
+                           @FormParam("senha")String senha,
+                           @FormParam("crm")String crm,
+                           @FormParam("id_especialidades")int idEspecialidades){
+        
+        Pessoas pessoaMedico = new Pessoas(nome, email, telefone, login, senha, null, null, null);
+        ConexaoUtil.inserir(pessoaMedico);
                       
-        Pessoas pessoas = (Pessoas)ConexaoUtil.selecionar(Pessoas.class, id_pessoas);
-        Especialidades especialidades = (Especialidades)ConexaoUtil.selecionar(Especialidades.class, id_especialidades);
+        Especialidades especialidade = new Especialidades();
+        especialidade.setEspecialidadeId(idEspecialidades);
         
-        Medicos medicos = new Medicos(pessoas, especialidades, crm, null);
-        
+        Medicos medicos = new Medicos(pessoaMedico, especialidade, crm, null);
         ConexaoUtil.inserir(medicos);
         
         return medicos;
@@ -48,7 +54,7 @@ public class ServicoMedicos {
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     public Medicos updateMedicos(@FormParam("id")int id,
-                                           @FormParam("crm")String crm){
+                                 @FormParam("crm")String crm){
                                           
          
         

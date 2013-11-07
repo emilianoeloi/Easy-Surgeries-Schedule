@@ -25,41 +25,38 @@
             <div class="middle">
 
                 <div id="conteudo" class="container">
-			<main class="content">
-				
-            <form class="pure-form pure-form-stacked">
-            <fieldset>
-            <legend>Medicos -  Lista</legend>
-            </fieldset>
-            </form>
-                
-           <table class="pure-table medicos">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Número</th>
-            <th>Editar</th>
-            <th>Deletar</th>
-            
-        </tr>
-    </thead>
+                    <main class="content">
 
-    <tbody>
-        
-    </tbody>
-</table>
+                        <form class="pure-form pure-form-stacked especialidades">
+                            <fieldset>
+                                <input id="id" name="id" type="hidden">
+                                <legend>Cadastro de Especialidades</legend>
 
-<br/>
+                                <div class="pure-g-r">
 
-<a class="pure-button pure-button-primary" href="medicoCadastro.html">Cadastrar</a>
+                                    <div class="pure-u-1-3">
+                                        <label for="nome">Nome</label>
+                                        <input id="nome" name="nome" type="text">
+                                    </div>
 
-    <style scoped>
-        .pure-button-xsmall {
-            font-size: 70%;
-        }
-    </style>
-                
-			</main><!-- .content -->
+                                    <div class="pure-u-1-3">
+                                        <label for="descricao">Descrição</label>
+                                        <textarea id="descricao" name="descricao"></textarea>
+                                    </div>
+
+
+
+
+                                </div>
+
+                                <br/>
+
+                                <button type="submit" class="pure-button pure-button-primary">Gravar</button>
+
+                            </fieldset>
+                        </form>
+
+                    </main><!-- .content -->
                 </div><!-- .container-->
 
                 <span class="menu"></span>	
@@ -75,7 +72,7 @@
         <script type="text/javascript" src="assets/js/util.js"></script>
         <script type="text/javascript" src="assets/js/processamento.js"></script>
         <script type="text/javascript" src="assets/js/principal.js"></script>
-        <script type="text/javascript" src="assets/js/medicos.js"></script>
-              
+        <script type="text/javascript" src="assets/js/especialidades.js"></script>
+
     </body>
 </html>

@@ -21,9 +21,9 @@ public class Aplicacao extends Application{
         Set<Class<?>> resources = new java.util.HashSet<Class<?>>();
         // following code can be used to customize Jersey 2.0 JSON provider:
         try {
-            Class jsonProvider = Class.forName("org.glassfish.jersey.jackson.JacksonFeature");
+            // Class jsonProvider = Class.forName("org.glassfish.jersey.jackson.JacksonFeature");
             // Class jsonProvider = Class.forName("org.glassfish.jersey.moxy.json.MoxyJsonFeature");
-            // Class jsonProvider = Class.forName("org.glassfish.jersey.jettison.JettisonFeature");
+            Class jsonProvider = Class.forName("org.glassfish.jersey.jettison.JettisonFeature");
             resources.add(jsonProvider);
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(getClass().getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -39,11 +39,13 @@ public class Aplicacao extends Application{
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(unatec.ads.ess.servicos.ServicoEquipamento.class);
-        resources.add(unatec.ads.ess.servicos.ServicoMateriais.class);
+        resources.add(unatec.ads.ess.servicos.ServicoSalas.class);
+        resources.add(unatec.ads.ess.servicos.ServicoEspecialidades.class);
         resources.add(unatec.ads.ess.servicos.ServicoMedicos.class);
+        /*resources.add(unatec.ads.ess.servicos.ServicoMateriais.class);
         resources.add(unatec.ads.ess.servicos.ServicoProcedimento.class);
         resources.add(unatec.ads.ess.servicos.ServicoSalas.class);
-        resources.add(unatec.ads.ess.servicos.ServicosLogin.class);
+        resources.add(unatec.ads.ess.servicos.ServicosLogin.class);*/
     }
     
 }
