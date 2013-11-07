@@ -53,16 +53,9 @@ public class ServicoEquipamento {
     }
     
     @DELETE
-    @Produces(MediaType.APPLICATION_JSON)
-    public boolean deleteEquipamentos(@FormParam("id")int id){
-         
-        
+    public void deleteEquipamentos(@FormParam("id")int id){
         Equipamentos equipamentos = (Equipamentos)ConexaoUtil.selecionar(Equipamentos.class, id);
-        
-        
         ConexaoUtil.excluir(equipamentos);
-        
-        return true;
     }
     
     @GET

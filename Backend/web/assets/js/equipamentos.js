@@ -68,6 +68,7 @@ Equipamentos.prototype = {
             function(data){
                 var htmlLista = [];
                 var odd = true;
+                $('.equipamentos .rows').remove();
                 for(var equipamento in data.equipamentos){
                     var item = data.equipamentos[equipamento];
                     htmlLista.push(self.templateLista.replaceAll('{id}', item[self.prefix + "Id"])
@@ -78,7 +79,12 @@ Equipamentos.prototype = {
                     
                 }
                 var html = $.parseHTML(htmlLista.join(''));
-                $('.equipamentos tbody').append(html)
+                $('.equipamentos tbody').append(html);
+                $(".equipamentos .delete").bind('click', function(){
+                    if(confirm('Excluir?')){
+                        self.excluir($(this).data("id"));
+                    }
+                });
                 processamento.terminar('equipamentos');
             }, 
             function(data){
@@ -105,6 +111,18 @@ Equipamentos.prototype = {
         requisicaoAjax(this.servico, "post", self.form.serialize(), 
             function(data){
                 document.location.href = self.paginaLista;
+                console.log('data', data);
+                processamento.terminar('equipamentos');
+            }, 
+            function(data){
+            //error
+            });
+    },
+    excluir : function(id){
+        processamento.iniciar('equipamentos');
+        requisicaoAjax(this.servico, "delete", {"id":id}, 
+            function(data){
+                self.listar();
                 console.log('data', data);
                 processamento.terminar('equipamentos');
             }, 
