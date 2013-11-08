@@ -41,7 +41,7 @@ public class ConexaoUtil {
     }
     
     
-    public static List<Object> listar(Class objClass) {
+        public static List<Object> listar(Class objClass) {
 
         List<Object> listas = null;
         Query query = null;
