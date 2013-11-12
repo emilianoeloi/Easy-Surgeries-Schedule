@@ -16,6 +16,8 @@ Processamento.prototype = {
         else
             this.processamentos[processo] = 1;
         
+        console.log(this.processamentos[processo]);
+        
         if(this.processamentos[processo] == 1)
             this.mostrarCarregando();
     },

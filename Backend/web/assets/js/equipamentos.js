@@ -34,8 +34,8 @@ Equipamentos.prototype = {
         self.form.attr('action', self.servico);
         switch(metodo){
             case 'put':
-                processamento.terminar('equipamentos');
-                requisicaoAjax(this.servico+"/"+self.getQuerystringId(), "get", {}, 
+                processamento.iniciar('equipamentos');
+                requisicaoAjax(this.servico+"/"+self.getQuerystringId()+"?_="+new Date().getTime(), "get", {}, 
                     function(data){
                         if(data){
                             $("#id").val(data[self.prefix + "Id"]);
@@ -64,7 +64,7 @@ Equipamentos.prototype = {
     },
     listar : function(){
         processamento.iniciar('equipamentos');
-        requisicaoAjax(this.servico, "get", {}, 
+        requisicaoAjax(this.servico+"?_="+new Date().getTime(), "get", {}, 
             function(data){
                 var htmlLista = [];
                 var odd = true;

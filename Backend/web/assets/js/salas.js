@@ -12,10 +12,11 @@ var Salas = function(){
     this.templateLista = null;
     this.prefix = "sala";
     this.form = null;
+    this.time = null;
 };
 Salas.prototype = {
     Initilize : function(){
-        this.form = $(".salas");
+        this.form = $(".salas"); 
         processamento.iniciar('salas-template-lista');
         requisicaoAjax("assets/template/salas-lista.html", "get", {}, 
             function(data){
@@ -34,8 +35,8 @@ Salas.prototype = {
         self.form.attr('action', self.servico);
         switch(metodo){
             case 'put':
-                processamento.terminar('salas');
-                requisicaoAjax(this.servico+"/"+self.getQuerystringId(), "get", {}, 
+                processamento.iniciar('salas');
+                requisicaoAjax(this.servico+"/"+self.getQuerystringId()+"?_="+new Date().getTime(), "get", {}, 
                     function(data){
                         if(data){
                             $("#id").val(data[self.prefix + "Id"]);
@@ -63,7 +64,7 @@ Salas.prototype = {
     },
     listar : function(){
         processamento.iniciar('salas');
-        requisicaoAjax(this.servico, "get", {}, 
+        requisicaoAjax(this.servico+"?_="+new Date().getTime(), "get", {}, 
             function(data){
                 console.log('data', data.salas);
                 var htmlLista = [];

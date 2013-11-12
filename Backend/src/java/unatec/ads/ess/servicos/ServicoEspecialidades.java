@@ -4,6 +4,8 @@
  */
 package unatec.ads.ess.servicos;
 
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -69,6 +71,11 @@ public class ServicoEspecialidades{
     @Produces(MediaType.APPLICATION_JSON)
     public List<Especialidades> lista(){
         List lista = ConexaoUtil.listar(Especialidades.class);
+        for (Iterator it = lista.iterator(); it.hasNext();) {
+            Especialidades especialidade = (Especialidades)it.next();
+            especialidade.setMedicoses(null);
+            
+        }
         return lista;
     }
 }
