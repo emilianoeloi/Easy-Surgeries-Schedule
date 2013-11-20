@@ -17,15 +17,15 @@ import unatec.ads.ess.entidadeDao.Pessoas;
  */
 public class ConexaoUtil {
 
-    private static Session s = HibernateUtil.getSessionFactory().openSession(); 
+    private static Session s = HibernateUtil.getSessionFactory().openSession();
 
-    public static List<Object> autenticaLogin(Class objClass, String email,int password) {
+    public static List<Object> autenticaLogin(Class objClass, String email, int password) {
 
         List<Object> listas = null;
-        
+
 
         try {
-            
+
             s.beginTransaction();
             Criteria crit = s.createCriteria(objClass);
             crit.add(Restrictions.eq("pessoa_email", email));
@@ -39,19 +39,18 @@ public class ConexaoUtil {
             return listas;
         }
     }
-    
-    
-        public static List<Object> listar(Class objClass) {
+
+    public static List<Object> listar(Class objClass) {
 
         List<Object> listas = null;
         Query query = null;
 
         try {
-            
+
             s.beginTransaction();
             query = s.createQuery("From " + objClass.getSimpleName());
             listas = query.list();
-            
+
         } catch (Exception e) {
             s.getTransaction().rollback();
             e.fillInStackTrace();
@@ -61,12 +60,12 @@ public class ConexaoUtil {
         }
     }
 
-    public static Object selecionar(Class objClass,int id) {
+    public static Object selecionar(Class objClass, int id) {
 
         Object objGet = null;
 
         try {
-                
+
             s.beginTransaction();
             objGet = s.get(objClass, id);
         } catch (Exception e) {
@@ -82,7 +81,7 @@ public class ConexaoUtil {
     public static boolean inserir(Object obj) {
 
         try {
-            
+
             s.beginTransaction();
             s.save(obj);
             s.getTransaction().commit();
@@ -90,7 +89,7 @@ public class ConexaoUtil {
             s.getTransaction().rollback();
             e.fillInStackTrace();
         } finally {
-           // s.close();
+            // s.close();
             return true;
         }
 

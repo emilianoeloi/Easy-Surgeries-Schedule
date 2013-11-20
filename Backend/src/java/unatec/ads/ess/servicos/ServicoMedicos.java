@@ -4,6 +4,7 @@
  */
 package unatec.ads.ess.servicos;
 
+import java.util.Iterator;
 import java.util.List;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -16,7 +17,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import unatec.ads.ess.controle.ConexaoUtil;
 import unatec.ads.ess.entidadeDao.Especialidades;
-import unatec.ads.ess.entidadeDao.Materiais;
 import unatec.ads.ess.entidadeDao.Medicos;
 import unatec.ads.ess.entidadeDao.Pessoas;
 
@@ -98,6 +98,13 @@ public class ServicoMedicos {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Medicos> lista(){
         List lista = ConexaoUtil.listar(Medicos.class);
+        for (Iterator it = lista.iterator(); it.hasNext();) {
+            Medicos medico = (Medicos)it.next();
+            medico.setAgendamentoses(null);
+            medico.setEspecialidades(null);
+            medico.setPessoas(null);
+            
+        }
         return lista;
     }
 }
