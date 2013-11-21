@@ -100,9 +100,12 @@ public class ServicoMedicos {
         List lista = ConexaoUtil.listar(Medicos.class);
         for (Iterator it = lista.iterator(); it.hasNext();) {
             Medicos medico = (Medicos)it.next();
+            Pessoas pessoaMedico = new Pessoas();
+            pessoaMedico.setPessoaNome(medico.getPessoas().getPessoaNome());
+            medico.setPessoas(pessoaMedico);
             medico.setAgendamentoses(null);
             medico.setEspecialidades(null);
-            medico.setPessoas(null);
+            //medico.setPessoas(null);
             
         }
         return lista;
