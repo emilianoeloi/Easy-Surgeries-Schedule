@@ -98,6 +98,9 @@ Medicos.prototype = {
                     var item = data.medicos[medico];
                     console.log('item', item);
                     htmlLista.push(self.templateLista.replaceAll('{id}', item[self.prefix + "Id"])
+                        .replaceAll('{nome}', item.pessoas.pessoaNome)
+                        .replaceAll('{email}', item.pessoas.pessoaEmail)
+                        .replaceAll('{telefone}', item.pessoas.pessoaTelefone)
                         .replaceAll('{crm}', item[self.prefix + "Crm"])
                         .replaceAll('{odd}', (odd)?'pure-table-odd':''));
                     odd = !odd;                                 
