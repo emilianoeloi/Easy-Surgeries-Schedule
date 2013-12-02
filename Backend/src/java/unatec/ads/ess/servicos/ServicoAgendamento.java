@@ -21,6 +21,7 @@ import javax.ws.rs.core.MediaType;
 import unatec.ads.ess.controle.ConexaoUtil;
 import unatec.ads.ess.entidadeDao.Agendamentos;
 import unatec.ads.ess.entidadeDao.Especialidades;
+import unatec.ads.ess.entidadeDao.Pessoas;
 import unatec.ads.ess.entidadeDao.Salas;
 
 /**
@@ -32,12 +33,18 @@ public class ServicoAgendamento {
     
 @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Agendamentos inserir(@FormParam("descricao")String descricao,
-                             @FormParam("qtd")int qtd){
+    public Agendamentos inserir(){
+    
+        Pessoas p = new Pessoas();
+        p.setPessoaNome(null);
+        p.setPessoaTelefone(null);
+        p.setPessoaEmail(null);
         
-        /*Agendamentos agendamentos;
         
-        ConexaoUtil.inserir(agendamentos);*/
+        
+        Agendamentos agendamentos = new Agendamentos(null, null, null, null, null, null, null, null);
+        
+        ConexaoUtil.inserir(agendamentos);
         
         return new Agendamentos();
     }
