@@ -1,0 +1,93 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+        <title>ESS - EASY SCHEDULE SURGERY</title>
+        <link href="assets/css/principal.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/pure-min.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript">
+            /*$(document).ready(function(){
+                $("#menu a").click(function( e ){
+                    e.preventDefault();
+                    var href = $( this ).attr('href');
+                    $("#conteudo").load( href +" #conteudo");
+                });
+            });*/
+        </script>
+    </head>
+
+    <body>
+        <div class="carregando hidden">Aguarde</div>
+        <div class="wrapper">
+            <span class="cabecalho"></span>
+
+            <br />
+            <div class="middle">
+
+                <div id="conteudo" class="container">
+                    <main class="content">
+
+                        <form class="pure-form">
+                            <legend>Agendamentos - List</legend>
+                            <fieldset class="pure-group">
+                                <input type="text" class="pure-input-1-2" placeholder="Buscar Agendamento">
+                            </fieldset>
+
+
+                            <a class="pure-button pure-button-primary" href="agendamentoCadastro.html"> Novo Agendamento </a>
+                            <a class="pure-button pure-button-primary" href="#"> Buscar </a>
+
+                            </br></br>
+
+                            
+
+                        </form>
+
+                        <table class="pure-table agendamentos">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Data</th>
+                                    <th>Hora Início</th>
+                                    <th>Hora Fim</th>
+                                    <th>Sala</th>
+                                    <th>Procedimento</th>
+                                    <th>Paciente</th>
+                                    <th>Médico</th>
+
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                            </tbody>
+                        </table>
+
+                        <br/>
+
+                        <style scoped>
+                            .pure-button-xsmall {
+                                font-size: 70%;
+                            }
+                        </style>
+
+                    </main><!-- .content -->
+                </div><!-- .container-->
+
+                <span class="menu"></span>	
+
+            </div><!-- .middle-->
+
+            <br />
+
+            <span class="rodape"></span>
+
+        </div><!-- .wrapper -->
+        <script type="text/javascript" src="assets/js/jquery-1.9.1.js"></script>
+        <script type="text/javascript" src="assets/js/util.js"></script>
+        <script type="text/javascript" src="assets/js/processamento.js"></script>
+        <script type="text/javascript" src="assets/js/principal.js"></script>
+        <script type="text/javascript" src="assets/js/agendamentos.js"></script>
+
+    </body>
+</html>

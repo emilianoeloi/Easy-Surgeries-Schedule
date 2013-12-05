@@ -95,13 +95,13 @@ public class ServicoAgendamento {
     }    
     
     @GET
-    @Path("/buscarsalas")
+    @Path("/buscarsalas/{_dataInicio}/{_dataTermino}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Salas> buscarSalas(@QueryParam("dataInicio")Date dataInicio, 
-                                         @QueryParam("dataTermino")Date dataTermino){
+    public List<Salas> buscarSalas(@PathParam("dataInicio")String pDataInicio, 
+                                         @PathParam("dataTermino")String pDataTermino){
         
-        dataInicio = new Date(2013, 11, 22, 8, 00);
-        dataTermino = new Date(2013, 11, 22, 9, 00);
+        Date dataInicio = new Date(2011, 11, 22, 8, 00);
+        Date dataTermino = new Date(2011, 11, 22, 9, 00);
         
         List<Salas> s = new LinkedList<Salas>();
          
